@@ -1,7 +1,7 @@
-from api_consumer import OddsApiClient
+from odds_api_gateway.api_consumer import OddsApiClient
 import configparser
 
-class ClientTester:
+class TestConsumerClient:
     def setup_client(self) -> OddsApiClient:
         cfg = configparser.ConfigParser()
         cfg.read("./api_config.cfg")

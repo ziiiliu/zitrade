@@ -53,7 +53,7 @@ class OddsApiClient:
 if __name__ == "__main__":
 
     cfg = configparser.ConfigParser()
-    cfg.read("./api_config.cfg")
+    cfg.read("../api_config.cfg")
     client = OddsApiClient(cfg)
     res = client.get_historical_odds("baseball_mlb", "uk", "h2h", "2023-07-30T12:00:00Z")
 
