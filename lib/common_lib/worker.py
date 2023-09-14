@@ -24,3 +24,7 @@ class PeriodicWorker:
         while self.is_running:
             self.function()
             await asyncio.sleep(self.interval)
+
+# TODO
+class Worker:
+    pass

@@ -3,6 +3,9 @@ from aiohttp import ClientSession
 import configparser
 import requests
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 CONFIG_SECTION = "odds_api"
 """
@@ -20,7 +23,7 @@ class OddsApiClient:
         resp = requests.get(url=f"{self.host}/v4/sports/?apiKey={self.api_key}")
         status = resp.status_code
         resp_json = resp.json()
-        print(resp_json)
+        logger.info(resp_json)
         return resp_json
     
     def get_odds(self, sport, regions, markets) -> dict:
