@@ -1,6 +1,7 @@
 import asyncio
 from aiohttp import ClientSession
 import configparser
+from configparser import ConfigParser
 import requests
 import json
 import logging
@@ -14,7 +15,7 @@ Odds API swagger page: https://app.swaggerhub.com/apis-docs/the-odds-api/odds-ap
 """
 
 class OddsApiClient:
-    def __init__(self, cfg):
+    def __init__(self, cfg: ConfigParser):
         self.host = cfg
         self.host = cfg.get(CONFIG_SECTION, "HOST")
         self.api_key = cfg.get(CONFIG_SECTION, "API_KEY")
@@ -41,13 +42,13 @@ class OddsApiClient:
         print(resp_json)
         return resp_json
     
-    def get_historical_odds(self, sport, regions, markets, date):
+    def get_historical_odds(self, sport, regions, markets, date) -> dict:
         resp = requests.get(url=f"{self.host}/v4/sports/{sport}/odds-history/?apiKey={self.api_key}&regions={regions}&markets={markets}&date={date}")
         resp_json = resp.json()
         print(resp_json)
         return resp_json
     
-    def get_event_odds(self, sport, regions, markets, event_id, date_format, odds_format):
+    def get_event_odds(self, sport, regions, markets, event_id, date_format, odds_format) -> dict:
         resp = requests.get(url=f"{self.host}/v4/sports/{sport}/events/{event_id}/?apiKey={self.api_key}&regions={regions}&markets={markets}&dateFormat={date_format}&oddsFormat={odds_format}")
         resp_json = resp.json()
         print(resp_json)
