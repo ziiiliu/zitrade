@@ -1,7 +1,10 @@
 from sqlalchemy import create_engine
+from sqlalchemy.sql.expression import select, insert
 import os
 from configparser import ConfigParser
+from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
+from structs import Odds
 
 CONFIG_SECTION = "db"
 load_dotenv()
@@ -15,3 +18,11 @@ class DBManager:
         url = f"postgresql://{user}:{password}@{host}:{port}"
         self.db_engine = create_engine(url=url)
     
+
+    def start(self):
+        self.session_maker = sessionmaker(bind=self.db_engine)
+
+    def write_odds_data(self):
+        with self.session_maker() as session:
+            statement = insert(Odds).values()
+            session.
