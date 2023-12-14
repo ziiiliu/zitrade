@@ -30,6 +30,10 @@ class OddsApiClient:
     def get_odds(self, sport, regions, markets) -> dict:
         """
         TODO: include potentially important optional parameters. E.g. eventIds, bookmakers
+        PARAMS
+        ------
+        sport:  str | sport key obtained from the /sports endpoint
+        markets: str | valid markets include `h2h`, `spreads`, `totals`, `outrights`, multiple markets are comma separated. 
         """
         resp = requests.get(url=f"{self.host}/v4/sports/{sport}/odds/?apiKey={self.api_key}&regions={regions}&markets={markets}")
         resp_json = resp.json()

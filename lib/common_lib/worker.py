@@ -27,4 +27,22 @@ class PeriodicWorker:
 
 # TODO
 class Worker:
-    pass
+    def __init__(self, function):
+        self.function = function
+        self.is_running = False
+
+    def start(self):
+        if self.is_running:
+            print("Worker Started")
+            return
+        self.is_running = True
+        self._run()
+
+    def stop(self):
+        if not self.is_running:
+            print("Worker shut down.")
+            return
+        self.is_running = False
+
+    def _run(self):
+        self.function()
